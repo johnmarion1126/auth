@@ -4,7 +4,6 @@ dotenv.config();
 import express from 'express';
 const app = express();
 
-// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 4000;
 
 app.get('/', (req, res) => {
