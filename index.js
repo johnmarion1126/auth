@@ -1,17 +1,32 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import express from 'express';
 import cors from 'cors';
-import pool from './config/db.js';
+import pg from 'pg';
+
+import config from './utils/config.js';
+import { unknownEndpoint, errorHandler } from './utils/middleware.js';
 
 const app = express();
-const PORT = process.env.PORT || 4000;
-const corsOptions = {origin: process.env.URL || '*'};
+const corsOptions = {origin: config.URL || '*'};
+const Pool = pg.Pool;
+
+const pool = new Pool({
+    user: config.DB_USER,
+    password: config.DB_PASSWORD,
+    host: config.DB_HOST,
+    database: config.DB_DATABASE,
+    port: config.DB_PORT,
+});
+
+pool.connect(err => {
+  if (err) {
+    console.error('error connecting to PostgreSQL', err.stack);
+  } else {
+    console.log(`connected to PostgreSQL on ${config.PORT}`);
+  }
+})
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World!</h1>');
@@ -24,8 +39,4 @@ app.get('/users', async (req, res) => {
     } catch (err) {
         console.error(err.message);
     }
-});
-
-app.listen(PORT, () => {
-    console.log(`Listen on the port ${PORT}...`);
 });
