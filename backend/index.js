@@ -7,10 +7,6 @@ import { unknownEndpoint, errorHandler } from './utils/middleware.js';
 const app = express();
 const corsOptions = { origin: config.URL || '*' };
 
-app.listen(config.PORT, () => {
-  console.log(`listening on port ${config.PORT}`);
-});
-
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -18,3 +14,9 @@ app.use(route);
 
 app.use(unknownEndpoint);
 app.use(errorHandler);
+
+app.listen(config.PORT, () => {
+  console.log(`listening on port ${config.PORT}`);
+});
+
+// TODO: ADD OTHER SET OF API CALLS
