@@ -9,10 +9,16 @@ const pool = new pg.Pool({
   port: config.DB_PORT,
 });
 
-pool.connect((err) => {
-  if (err) {
-    console.error('error connecting to PostgreSQL', err.stack);
+const connectToDatabase = async () => {
+  try {
+    await pool.connect();
+    console.log('database connected');
+  } catch (err) {
+    console.log('connecting to database failed');
+    return process.exit(1);
   }
-});
 
-export default pool;
+  return null;
+};
+
+export { connectToDatabase, pool };
