@@ -3,18 +3,6 @@ import pool from '../database/db.js';
 
 const app = express();
 
-// CREATE
-app.post('/users/create', async (req, res) => {
-  const { userId, username, password } = req.body;
-
-  try {
-    const user = await pool.query('INSERT INTO users (user_id, username, password) VALUES ($1, $2, $3)', [userId, username, password]);
-    res.json(user.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
 // READ
 app.get('/users', async (req, res) => {
   try {
@@ -30,6 +18,18 @@ app.get('/users/:id', async (req, res) => {
 
   try {
     const user = await pool.query('SELECT * FROM users WHERE user_id = $1', [id]);
+    res.json(user.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// CREATE
+app.post('/users/create', async (req, res) => {
+  const { userId, username, password } = req.body;
+
+  try {
+    const user = await pool.query('INSERT INTO users (user_id, username, password) VALUES ($1, $2, $3)', [userId, username, password]);
     res.json(user.rows);
   } catch (err) {
     console.error(err.message);
