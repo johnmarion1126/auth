@@ -1,6 +1,6 @@
 import supertest from 'supertest';
 import 'regenerator-runtime';
-import pool from '../database/db.js';
+import { pool } from '../database/db.js';
 import app from '../app';
 
 const api = supertest(app);
