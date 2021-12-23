@@ -12,8 +12,6 @@ const pool = new pg.Pool({
 pool.connect((err) => {
   if (err) {
     console.error('error connecting to PostgreSQL', err.stack);
-  } else {
-    console.log('connected to PostgreSQL');
   }
 });
 

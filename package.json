@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon index",
     "start": "node index",
-    "test": "jest --verbose --runInBand"
+    "test": "jest --verbose --runInBand --forceExit"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -23,6 +23,7 @@
     "eslint-plugin-import": "^2.25.3",
     "jest": "^27.4.5",
     "nodemon": "^2.0.15",
+    "regenerator-runtime": "^0.13.9",
     "supertest": "^6.1.6"
   }
 }
