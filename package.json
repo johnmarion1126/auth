@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon index",
     "start": "node index",
-    "test": "jest --verbose --runInBand --detectOpenHandles --forceExit"
+    "test": "jest --verbose --runInBand --detectOpenHandles"
   },
   "dependencies": {
     "cors": "^2.8.5",
