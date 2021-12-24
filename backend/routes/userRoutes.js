@@ -39,10 +39,10 @@ app.post('/users/create', async (req, res) => {
 // UPDATE
 app.put('/users/update/:id', async (req, res) => {
   const id = parseInt(req.params.id, 10);
-  const { username } = req.body;
+  const { password } = req.body;
 
   try {
-    const user = await pool.query('UPDATE users SET username = $1 WHERE user_id = $2', [username, id]);
+    const user = await pool.query('UPDATE users SET password = $1 WHERE user_id = $2', [password, id]);
     res.json(user);
   } catch (err) {
     console.error(err.message);
