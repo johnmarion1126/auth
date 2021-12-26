@@ -5,7 +5,7 @@ import app from '../app';
 
 const api = supertest(app);
 
-describe('API Calls', () => {
+describe('test user api calls', () => {
   test('a valid user can be added', async () => {
     const newUser = {
       userId: 1,
@@ -17,7 +17,7 @@ describe('API Calls', () => {
     const usersLength = users.body.length;
 
     await api
-      .post('/users/create')
+      .post('/users')
       .send(newUser)
       .expect(200)
       .expect('Content-Type', /application\/json/);
@@ -46,13 +46,13 @@ describe('API Calls', () => {
     expect(resultUsername).toEqual('testusername');
   });
 
-  test(' a user can be updated', async () => {
+  test('a user can be updated', async () => {
     const updatedUser = {
       password: 'newpassword',
     };
 
     await api
-      .put('/users/update/1')
+      .put('/users/1')
       .send(updatedUser)
       .expect(200)
       .expect('Content-Type', /application\/json/);
@@ -63,20 +63,20 @@ describe('API Calls', () => {
 
     expect(resultPassword).toEqual('newpassword');
   });
-});
 
-test('a user can be deleted', async () => {
-  const users = await api.get('/users');
-  const usersLength = users.body.length;
+  test('a user can be deleted', async () => {
+    const users = await api.get('/users');
+    const usersLength = users.body.length;
 
-  await api
-    .delete('/users/delete/1')
-    .expect(200);
+    await api
+      .delete('/users/1')
+      .expect(204);
 
-  const newUsers = await api.get('/users');
-  const newUsersLength = newUsers.body.length;
+    const newUsers = await api.get('/users');
+    const newUsersLength = newUsers.body.length;
 
-  expect(newUsersLength).toEqual(usersLength - 1);
+    expect(newUsersLength).toEqual(usersLength - 1);
+  });
 });
 
 afterAll(() => {

@@ -25,7 +25,7 @@ app.get('/users/:id', async (req, res) => {
 });
 
 // CREATE
-app.post('/users/create', async (req, res) => {
+app.post('/users', async (req, res) => {
   const { userId, username, password } = req.body;
 
   try {
@@ -37,7 +37,7 @@ app.post('/users/create', async (req, res) => {
 });
 
 // UPDATE
-app.put('/users/update/:id', async (req, res) => {
+app.put('/users/:id', async (req, res) => {
   const id = parseInt(req.params.id, 10);
   const { password } = req.body;
 
@@ -50,12 +50,12 @@ app.put('/users/update/:id', async (req, res) => {
 });
 
 // DELETE
-app.delete('/users/delete/:id', async (req, res) => {
+app.delete('/users/:id', async (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   try {
-    const user = await pool.query('DELETE FROM users WHERE user_id = $1', [id]);
-    res.json(user);
+    await pool.query('DELETE FROM users WHERE user_id = $1', [id]);
+    res.status(204).end();
   } catch (err) {
     console.error(err.message);
   }
