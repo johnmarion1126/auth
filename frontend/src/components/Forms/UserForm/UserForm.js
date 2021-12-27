@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 
+import useField from '../useField';
+
 const UserForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const username = useField('username');
+  const password = useField('password');
   const [isNewUser, setIsNewUser] = useState('SignIn');
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setUsername('');
-    setPassword('');
+    // eslint-disable-next-line no-console
+    console.log(`Username: ${username.value}`);
+    // eslint-disable-next-line no-console
+    console.log(`Password: ${password.value}`);
+    username.value = '';
+    password.value = '';
   };
 
   return (
@@ -27,15 +25,15 @@ const UserForm = () => {
       <form>
         <div>Username</div>
         <input
-          type="text"
-          value={username}
-          onChange={handleUsernameChange}
+          type={username.type}
+          value={username.value}
+          onChange={username.onChange}
         />
         <div>Password</div>
         <input
-          type="text"
-          value={password}
-          onChange={handlePasswordChange}
+          type={password.type}
+          value={password.value}
+          onChange={password.onChange}
         />
         <button
           type="submit"
@@ -55,3 +53,4 @@ export default UserForm;
 // TODO: Finish user form
 // https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps
 // https://fullstackopen.com/en/part1/component_state_event_handlers#event-handling
+// https://fullstackopen.com/en/part7/custom_hooks#hooks
