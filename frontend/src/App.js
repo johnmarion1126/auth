@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UserForm from './components/Forms/UserForm';
+import UserForm from './components/Forms/UserForm/UserForm';
 
 const App = () => (
   <div>
