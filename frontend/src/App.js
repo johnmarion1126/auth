@@ -5,5 +5,4 @@ const App = () => (
     Hello World
   </div>
 );
-
 export default App;
