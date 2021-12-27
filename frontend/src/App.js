@@ -1,8 +1,11 @@
 import React from 'react';
 
+import UserForm from './components/Forms/UserForm';
+
 const App = () => (
   <div>
-    Hello World
+    <UserForm />
   </div>
 );
+
 export default App;
