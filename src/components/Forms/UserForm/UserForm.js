@@ -1,44 +1,22 @@
 import React, { useState } from 'react';
 
 import useField from '../useField';
+import SignUpForm from './SignUp';
+import LogInForm from './LogInForm';
 
 const UserForm = () => {
   const username = useField('username');
   const password = useField('password');
-  const [isNewUser, setIsNewUser] = useState('SignIn');
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    username.value = '';
-    password.value = '';
-  };
+  const [isNewUser, setIsNewUser] = useState('SignUp');
 
   return (
     <>
       {
-        isNewUser === 'SignIn' ? 'Sign In' : 'Log In'
+        isNewUser === 'SignUp'
+          ? <LogInForm username={username} password={password} />
+          : <SignUpForm username={username} password={password} />
       }
-      <form>
-        <div className="underline">Username</div>
-        <input
-          type={username.type}
-          value={username.value}
-          onChange={username.onChange}
-        />
-        <div>Password</div>
-        <input
-          type={password.type}
-          value={password.value}
-          onChange={password.onChange}
-        />
-        <button
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
-      </form>
-      <button type="button" onClick={() => { setIsNewUser('SignIn'); }}>Sign In</button>
+      <button type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign In</button>
       <button type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
     </>
   );
