@@ -1,17 +1,17 @@
 import React from 'react';
 
-const LogInForm = ({ username, password }) => (
+const SignUpForm = ({ username, password }) => (
   <div>
-    Log In
+    Sign Up
     <form>
-      <div className="underline">Username</div>
+      <div className="underline">Create username</div>
       <input
         type={username.type}
         value={username.value}
         onChange={username.onChange}
         className="border-solid border-black border-2"
       />
-      <div className="underline">Password</div>
+      <div className="underline">Create password</div>
       <input
         type={password.type}
         value={password.value}
@@ -22,4 +22,4 @@ const LogInForm = ({ username, password }) => (
   </div>
 );
 
-export default LogInForm;
+export default SignUpForm;
