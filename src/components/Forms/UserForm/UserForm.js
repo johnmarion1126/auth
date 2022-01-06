@@ -9,10 +9,6 @@ const UserForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(`Username: ${username.value}`);
-    // eslint-disable-next-line no-console
-    console.log(`Password: ${password.value}`);
     username.value = '';
     password.value = '';
   };
