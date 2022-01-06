@@ -19,7 +19,7 @@ const UserForm = () => {
         isNewUser === 'SignIn' ? 'Sign In' : 'Log In'
       }
       <form>
-        <div>Username</div>
+        <div className="underline">Username</div>
         <input
           type={username.type}
           value={username.value}
