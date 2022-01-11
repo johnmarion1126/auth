@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { sayHello } from '../../../features/User/userSlice';
 
 import useField from '../useField';
 import SignUpForm from './SignUp';
@@ -9,6 +11,12 @@ const UserForm = () => {
   const password = useField('password');
   const [isNewUser, setIsNewUser] = useState('SignUp');
 
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  // eslint-disable-next-line no-console
+  console.log(user);
+
   return (
     <>
       {
@@ -18,13 +26,15 @@ const UserForm = () => {
       }
       <button type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign In</button>
       <button type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
+
+      <button
+        type="button"
+        onClick={() => dispatch(sayHello())}
+      >
+        Click Me
+      </button>
     </>
   );
 };
 
 export default UserForm;
-
-// TODO: Finish user form
-// https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps
-// https://fullstackopen.com/en/part1/component_state_event_handlers#event-handling
-// https://fullstackopen.com/en/part7/custom_hooks#hooks
