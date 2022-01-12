@@ -29,7 +29,7 @@ const UserForm = () => {
 
       <button
         type="button"
-        onClick={() => dispatch(sayHello())}
+        onClick={() => dispatch(sayHello('HEYYO'))}
       >
         Click Me
       </button>
