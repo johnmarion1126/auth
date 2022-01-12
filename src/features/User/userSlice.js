@@ -8,9 +8,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    sayHello: (state) => {
+    sayHello: (state, { payload }) => {
       // eslint-disable-next-line no-console
-      console.log(state.value);
+      console.log(payload);
     },
   },
 });
