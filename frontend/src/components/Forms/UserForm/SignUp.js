@@ -2,16 +2,16 @@ import React from 'react';
 
 const SignUpForm = ({ username, password }) => (
   <div>
-    <h1 className="text-2xl font-bold">Sign Up</h1>
+    <h1 className="text-xl font-bold text-gray-900">Sign Up</h1>
     <form>
-      <div className="m-2 mt-4">Create username</div>
+      <div className="m-2 mt-4 text-gray-800 focus:border-gray-900">Create username</div>
       <input
         type={username.type}
         value={username.value}
         onChange={username.onChange}
         className="border-solid border-gray-400 border-2 p-1 px-2"
       />
-      <div className="m-2 mt-4">Create password</div>
+      <div className="m-2 mt-4 text-gray-800 focus:border-gray-900">Create password</div>
       <input
         type={password.type}
         value={password.value}
