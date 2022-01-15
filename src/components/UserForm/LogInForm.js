@@ -18,6 +18,7 @@ const LogInForm = ({ username, password }) => (
         onChange={password.onChange}
         className="border-solid border-gray-400 border-2 p-1 px-2 focus:border-gray-900 rounded-md"
       />
+      <input type="submit" className="absolute top-0 invisible" />
     </form>
   </div>
 );
