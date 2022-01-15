@@ -2,21 +2,21 @@ import React from 'react';
 
 const SignUpForm = ({ username, password }) => (
   <div>
-    Sign Up
+    <h1 className="text-2xl font-bold">Sign Up</h1>
     <form>
-      <div className="underline">Create username</div>
+      <div className="m-2 mt-4">Create username</div>
       <input
         type={username.type}
         value={username.value}
         onChange={username.onChange}
-        className="border-solid border-black border-2"
+        className="border-solid border-gray-400 border-2 p-1 px-2"
       />
-      <div className="underline">Create password</div>
+      <div className="m-2 mt-4">Create password</div>
       <input
         type={password.type}
         value={password.value}
         onChange={password.onChange}
-        className="border-solid border-black border-2"
+        className="border-solid border-gray-400 border-2 p-1 px-2"
       />
     </form>
   </div>

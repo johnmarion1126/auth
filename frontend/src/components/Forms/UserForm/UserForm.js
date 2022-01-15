@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { sayHello } from '../../../features/User/userSlice';
 
 import useField from '../useField';
 import SignUpForm from './SignUp';
@@ -11,29 +9,18 @@ const UserForm = () => {
   const password = useField('password');
   const [isNewUser, setIsNewUser] = useState('SignUp');
 
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-
-  // eslint-disable-next-line no-console
-  console.log(user);
-
   return (
-    <>
+    <div className="border-2 border-solid border-black py-10 px-20 rounded-md">
       {
-        isNewUser === 'SignUp'
+        isNewUser === 'LogIn'
           ? <LogInForm username={username} password={password} />
           : <SignUpForm username={username} password={password} />
       }
-      <button type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign In</button>
-      <button type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
-
-      <button
-        type="button"
-        onClick={() => dispatch(sayHello('HEYYO'))}
-      >
-        Click Me
-      </button>
-    </>
+      <div className="mt-6">
+        <button className="m-2  mx-4 font-semibold hover:opacity-70" type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign In</button>
+        <button className="m-2 mx-4 font-semibold hover:opacity-70" type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
+      </div>
+    </div>
   );
 };
 
