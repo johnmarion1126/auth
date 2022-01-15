@@ -10,15 +10,16 @@ const UserForm = () => {
   const [isNewUser, setIsNewUser] = useState('SignUp');
 
   return (
-    <div className="border-2 border-solid border-black py-10 px-20 rounded-md">
+    <div className="border-2 border-solid border-gray-900 py-10 px-20 rounded-md filter drop-shadow-md">
+      <h1 className="text-lg mb-4 text-indigo-500 font-bold">Messages</h1>
       {
         isNewUser === 'LogIn'
           ? <LogInForm username={username} password={password} />
           : <SignUpForm username={username} password={password} />
       }
       <div className="mt-6">
-        <button className="m-2  mx-4 font-semibold hover:opacity-70" type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign In</button>
-        <button className="m-2 mx-4 font-semibold hover:opacity-70" type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
+        <button className={isNewUser === 'SignUp' ? 'm-2  mx-4 font-semibold hover:opacity-70 text-indigo-500' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-700'} type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign In</button>
+        <button className={isNewUser === 'LogIn' ? 'm-2 mx-4 font-semibold hover:opacity-70 text-indigo-500' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-700'} type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
       </div>
     </div>
   );
