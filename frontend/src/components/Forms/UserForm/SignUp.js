@@ -9,14 +9,14 @@ const SignUpForm = ({ username, password }) => (
         type={username.type}
         value={username.value}
         onChange={username.onChange}
-        className="border-solid border-gray-400 border-2 p-1 px-2"
+        className="border-solid border-gray-400 border-2 p-1 px-2 bg-slate-50"
       />
       <div className="m-2 mt-4 text-gray-800 focus:border-gray-900">Create password</div>
       <input
         type={password.type}
         value={password.value}
         onChange={password.onChange}
-        className="border-solid border-gray-400 border-2 p-1 px-2"
+        className="border-solid border-gray-400 border-2 p-1 px-2 bg-slate-50"
       />
     </form>
   </div>
