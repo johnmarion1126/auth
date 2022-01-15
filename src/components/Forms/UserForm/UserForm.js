@@ -10,7 +10,7 @@ const UserForm = () => {
   const [isNewUser, setIsNewUser] = useState('SignUp');
 
   return (
-    <div className="border-2 border-solid border-gray-900 py-10 px-20 rounded-md filter drop-shadow-md">
+    <div className="border-2 border-solid border-gray-900 py-10 px-20 rounded-md filter">
       <h1 className="text-lg mb-4 text-indigo-500 font-bold">Messages</h1>
       {
         isNewUser === 'LogIn'
