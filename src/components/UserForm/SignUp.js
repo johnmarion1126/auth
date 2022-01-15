@@ -30,12 +30,14 @@ const SignUpForm = ({ username, password }) => {
       setIsRetypePasswordEmpty(false);
     }
 
-    if (!isUsernameEmpty && !isPasswordEmpty && !isRetypePasswordEmpty) {
+    if (username.value.length > 0 && password.value.length > 0 && retypePassword.value.length) {
       if (password.value !== retypePassword.value) {
         setIsPasswordEmpty(true);
         setIsRetypePasswordEmpty(true);
       } else {
-        console.log('SUCCESS');
+        username.setValue('');
+        password.setValue('');
+        retypePassword.setValue('');
       }
     }
   };
