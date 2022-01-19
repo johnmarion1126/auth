@@ -18,8 +18,8 @@ const UserForm = () => {
           : <SignUpForm username={username} password={password} />
       }
       <div className="mt-6">
-        <button className={isNewUser === 'SignUp' ? 'm-2  mx-4 font-semibold hover:opacity-70 text-indigo-500' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-700'} type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign Up</button>
-        <button className={isNewUser === 'LogIn' ? 'm-2 mx-4 font-semibold hover:opacity-70 text-indigo-500' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-700'} type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
+        <button className={isNewUser === 'SignUp' ? 'm-2  mx-4 font-semibold hover:opacity-70 text-indigo-500' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-400'} type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign Up</button>
+        <button className={isNewUser === 'LogIn' ? 'm-2 mx-4 font-semibold hover:opacity-70 text-indigo-500' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-400'} type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
       </div>
     </div>
   );
