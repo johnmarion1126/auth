@@ -21,3 +21,8 @@ export default app;
 
 // TODO: https://fullstackopen.com/en/part4/user_administration
 // TODO: https://fullstackopen.com/en/part4/token_authentication
+
+// TODO: Allow creation of users
+// TODO: Allow log in of users
+// TODO: Allow users to press button on login
+// TODO: Prevent users from pressing button when not log in

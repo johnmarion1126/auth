@@ -10,6 +10,7 @@ const config = {
   DB_HOST: process.env.DB_HOST,
   DB_DATABASE: process.env.DB_DATABASE,
   DB_PORT: process.env.DB_PORT,
+  SECRET: process.env.SECRET,
 };
 
 export default config;
