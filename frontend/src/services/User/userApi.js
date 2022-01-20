@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+// eslint-disable-next-line no-unused-vars
+import uniqid from 'uniqid';
 
 const userApi = createApi({
   reducerPath: 'userApi',
@@ -11,10 +13,22 @@ const userApi = createApi({
       query: () => '/users',
       providesTags: ['User'],
     }),
+    addUser: builder.mutation({
+      query: ({ username, password }) => ({
+        url: '/users',
+        method: 'POST',
+        body: {
+          userId: uniqid(),
+          username,
+          password,
+        },
+      }),
+    }),
   }),
 });
 
 export const {
   useUsersQuery,
+  useAddUserMutation,
 } = userApi;
 export default userApi;
