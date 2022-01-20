@@ -18,6 +18,3 @@ app.use(unknownEndpoint);
 app.use(errorHandler);
 
 export default app;
-
-// TODO: Show error if username is already taken
-// TODO: Show error if username or password is incorrect
