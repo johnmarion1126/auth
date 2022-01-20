@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../features/User/userSlice';
+
 const LogInForm = ({ username, password }) => {
   const [isUsernameEmpty, setIsUsernameEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,6 +25,7 @@ const LogInForm = ({ username, password }) => {
     }
 
     if (username.value.length > 0 && password.value.length > 0) {
+      dispatch(logIn());
       username.setValue('');
       password.setValue('');
     }

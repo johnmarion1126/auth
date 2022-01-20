@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../features/User/userSlice';
+
 import { useAddUserMutation } from '../../services/User/userApi';
 import useField from '../useField';
 
 const SignUpForm = ({ username, password }) => {
   const [addUser] = useAddUserMutation();
   const retypePassword = useField('password');
+
+  const dispatch = useDispatch();
 
   const [isUsernameEmpty, setIsUsernameEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
@@ -41,6 +46,7 @@ const SignUpForm = ({ username, password }) => {
           username: username.value,
           password: password.value,
         });
+        dispatch(logIn());
         username.setValue('');
         password.setValue('');
         retypePassword.setValue('');

@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useSelector } from 'react-redux';
 
 import Home from './components/Home/Home';
 import UserForm from './components/UserForm/UserForm';
 import AuthroziedButton from './components/Button/Button';
 
 const App = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center text-center items-center m-0 p-0 bg-slate-50">
