@@ -40,6 +40,12 @@ const signUpUser = async (req, res) => {
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
   try {
+    const returnUser = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+
+    if (returnUser.rows.length > 0) {
+      return res.status(400).send();
+    }
+
     const user = await pool.query('INSERT INTO users (user_id, username, password) VALUES ($1, $2, $3)', [userId, username, passwordHash]);
 
     const userToken = {
