@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn, setUsername } from '../../features/User/userSlice';
 
-import { useAddUserMutation } from '../../services/User/userApi';
+import { useSignUpUserMutation } from '../../services/User/userApi';
 import useField from '../useField';
 
 const SignUpForm = ({ username, password }) => {
-  const [addUser] = useAddUserMutation();
+  const [signUpUser] = useSignUpUserMutation();
   const retypePassword = useField('password');
 
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const SignUpForm = ({ username, password }) => {
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
   const [isRetypePasswordEmpty, setIsRetypePasswordEmpty] = useState(false);
 
-  const handleSumbit = (event) => {
+  const handleSumbit = async (event) => {
     event.preventDefault();
 
     if (username.value.length === 0) {
@@ -42,10 +42,11 @@ const SignUpForm = ({ username, password }) => {
         setIsPasswordEmpty(true);
         setIsRetypePasswordEmpty(true);
       } else {
-        addUser({
+        const res = await signUpUser({
           username: username.value,
           password: password.value,
         });
+        console.log(res.data.token);
         dispatch(logIn());
         dispatch(setUsername(username.value));
         username.setValue('');

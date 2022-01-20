@@ -13,9 +13,9 @@ const userApi = createApi({
       query: () => '/users',
       providesTags: ['User'],
     }),
-    addUser: builder.mutation({
+    signUpUser: builder.mutation({
       query: ({ username, password }) => ({
-        url: '/users',
+        url: '/signup',
         method: 'POST',
         body: {
           userId: uniqid(),
@@ -29,6 +29,6 @@ const userApi = createApi({
 
 export const {
   useUsersQuery,
-  useAddUserMutation,
+  useSignUpUserMutation,
 } = userApi;
 export default userApi;
