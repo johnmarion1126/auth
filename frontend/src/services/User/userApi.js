@@ -24,11 +24,21 @@ const userApi = createApi({
         },
       }),
     }),
+    getSecretData: builder.query({
+      query: (token) => ({
+        url: '/secret',
+        method: 'GET',
+        headers: {
+          authorization: token,
+        },
+      }),
+    }),
   }),
 });
 
 export const {
   useUsersQuery,
   useSignUpUserMutation,
+  useGetSecretDataQuery,
 } = userApi;
 export default userApi;

@@ -12,5 +12,6 @@ app.delete('/users/:id', userAPI.deleteUser);
 
 app.get('/login', authAPI.logInUser);
 app.post('/signup', authAPI.signUpUser);
+app.get('/secret', authAPI.returnSecretData);
 
 export default app;

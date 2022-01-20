@@ -53,7 +53,25 @@ const signUpUser = async (req, res) => {
   }
 };
 
+const returnSecretData = async (req, res) => {
+  const { authorization } = req.headers;
+  if (!authorization) return;
+
+  const token = authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token, config.SECRET);
+
+  if (!decodedToken.iat) {
+    return res.status(401).json({ error: 'token missing or invalid' });
+  }
+
+  const data = {
+    result: 'The button has been pressed!',
+  };
+
+  res.json(data);
+};
 export default {
   logInUser,
   signUpUser,
+  returnSecretData,
 };
