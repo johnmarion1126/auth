@@ -11,9 +11,11 @@ const App = () => {
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center text-center items-center m-0 p-0 bg-slate-50">
-      { !isLoggedIn
-        ? <UserForm />
-        : <Home />}
+      <div className="border-2 border-solid border-gray-900 py-10 px-14 md:px-20 rounded-md filter bg-white min-h-[55%] min-w-[45%]">
+        { !isLoggedIn
+          ? <UserForm />
+          : <Home />}
+      </div>
       <AuthroziedButton />
       <footer className="absolute p-1 px-4 bottom-0 w-screen bg-gray-900 text-indigo-500 text-sm flex justify-between">
         <a href="https://github.com/johnmarion1126/authentication" className="hover:opacity-70">
