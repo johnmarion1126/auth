@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center text-center items-center m-0 p-0 bg-slate-50">
-      <div className="border-2 border-solid border-gray-900 py-10 px-14 md:px-20 rounded-md filter bg-white min-h-[55%] min-w-[45%]">
+      <div className="border-2 border-solid border-gray-900 py-10 px-14 md:px-20 rounded-md filter bg-white min-h-[55%]">
         { !isLoggedIn
           ? <UserForm />
           : <Home />}
