@@ -15,6 +15,7 @@ const SignUpForm = ({ username, password }) => {
   const [isUsernameEmpty, setIsUsernameEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
   const [isRetypePasswordEmpty, setIsRetypePasswordEmpty] = useState(false);
+  const [isUsernameTaken, setIsUsernameTaken] = useState(false);
 
   const handleSumbit = async (event) => {
     event.preventDefault();
@@ -46,12 +47,18 @@ const SignUpForm = ({ username, password }) => {
           username: username.value,
           password: password.value,
         });
-        dispatch(logIn());
-        dispatch(setUsername(username.value));
-        dispatch(setToken(res.data.token));
-        username.setValue('');
-        password.setValue('');
-        retypePassword.setValue('');
+
+        if (!res.error) {
+          setIsUsernameTaken(false);
+          dispatch(logIn());
+          dispatch(setUsername(username.value));
+          dispatch(setToken(res.data.token));
+          username.setValue('');
+          password.setValue('');
+          retypePassword.setValue('');
+        } else {
+          setIsUsernameTaken(true);
+        }
       }
     }
   };
@@ -88,6 +95,7 @@ const SignUpForm = ({ username, password }) => {
         />
         { isUsernameEmpty || isPasswordEmpty || isRetypePasswordEmpty ? <div className="text-red-400 mt-4">All fields must be filled</div> : null }
         { !isUsernameEmpty && !isPasswordEmpty && !isRetypePasswordEmpty && password.value !== retypePassword.value ? <div className="text-red-400 mt-4">Passwords must match</div> : null }
+        { !isUsernameTaken ? null : <div className="text-red-400 mt-4">Username is taken</div>}
       </form>
     </div>
 
