@@ -4,7 +4,8 @@ import { pool } from '../database/db.js';
 import config from '../utils/config.js';
 
 const logInUser = async (req, res) => {
-  const { username, password } = req.body;
+  if (req.query.username === undefined || req.query.password === undefined) return;
+  const { username, password } = req.query;
 
   try {
     const user = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
@@ -64,11 +65,9 @@ const returnSecretData = async (req, res) => {
     return res.status(401).json({ error: 'token missing or invalid' });
   }
 
-  const data = {
+  res.json({
     result: 'The button has been pressed!',
-  };
-
-  res.json(data);
+  });
 };
 export default {
   logInUser,
