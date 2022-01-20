@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { logIn } from '../../features/User/userSlice';
+import { logIn, setUsername, setToken } from '../../features/User/userSlice';
+import { useLazyLogInUserQuery } from '../../services/User/userApi';
 
 const LogInForm = ({ username, password }) => {
   const [isUsernameEmpty, setIsUsernameEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+  const [trigger] = useLazyLogInUserQuery();
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (username.value.length === 0) {
@@ -25,9 +27,17 @@ const LogInForm = ({ username, password }) => {
     }
 
     if (username.value.length > 0 && password.value.length > 0) {
-      dispatch(logIn());
-      username.setValue('');
-      password.setValue('');
+      const res = await trigger({
+        username: username.value,
+        password: password.value,
+      });
+      if (!res.error) {
+        dispatch(logIn());
+        dispatch(setUsername(username.value));
+        dispatch(setToken(res.data.token));
+        username.setValue('');
+        password.setValue('');
+      }
     }
   };
   return (

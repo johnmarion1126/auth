@@ -18,8 +18,8 @@ const App = () => {
       </div>
       <AuthroziedButton />
       <footer className="absolute p-1 px-4 bottom-0 w-screen bg-gray-900 text-indigo-500 text-sm flex justify-between">
-        <a href="https://github.com/johnmarion1126/authentication" className="hover:opacity-70">
-          johnmarion1126/messages
+        <a href="https://github.com/johnmarion1126/auth" className="hover:opacity-70">
+          johnmarion1126/auth
         </a>
         <a href="https://github.com/johnmarion1126" className="hover:opacity-70">Made By John</a>
       </footer>

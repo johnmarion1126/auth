@@ -24,6 +24,16 @@ const userApi = createApi({
         },
       }),
     }),
+    logInUser: builder.query({
+      query: ({ username, password }) => ({
+        url: '/login',
+        method: 'GET',
+        params: {
+          username,
+          password,
+        },
+      }),
+    }),
     getSecretData: builder.query({
       query: (token) => ({
         url: '/secret',
@@ -40,5 +50,6 @@ export const {
   useUsersQuery,
   useSignUpUserMutation,
   useGetSecretDataQuery,
+  useLazyLogInUserQuery,
 } = userApi;
 export default userApi;
