@@ -19,9 +19,5 @@ app.use(errorHandler);
 
 export default app;
 
-// TODO: https://fullstackopen.com/en/part4/user_administration
-// TODO: https://fullstackopen.com/en/part4/token_authentication
-
-// TODO: Allow log in of users
-// TODO: Allow users to press button on login
-// TODO: Prevent users from pressing button when not log in
+// TODO: Show error if username is already taken
+// TODO: Show error if username or password is incorrect
