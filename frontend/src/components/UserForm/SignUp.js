@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { logIn } from '../../features/User/userSlice';
+import { logIn, setUsername } from '../../features/User/userSlice';
 
 import { useAddUserMutation } from '../../services/User/userApi';
 import useField from '../useField';
@@ -47,6 +47,7 @@ const SignUpForm = ({ username, password }) => {
           password: password.value,
         });
         dispatch(logIn());
+        dispatch(setUsername(username.value));
         username.setValue('');
         password.setValue('');
         retypePassword.setValue('');
