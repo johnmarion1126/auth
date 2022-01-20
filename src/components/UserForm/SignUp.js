@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
+import { useAddUserMutation } from '../../services/User/userApi';
 import useField from '../useField';
 
 const SignUpForm = ({ username, password }) => {
+  const [addUser] = useAddUserMutation();
   const retypePassword = useField('password');
 
   const [isUsernameEmpty, setIsUsernameEmpty] = useState(false);
@@ -35,6 +37,10 @@ const SignUpForm = ({ username, password }) => {
         setIsPasswordEmpty(true);
         setIsRetypePasswordEmpty(true);
       } else {
+        addUser({
+          username: username.value,
+          password: password.value,
+        });
         username.setValue('');
         password.setValue('');
         retypePassword.setValue('');
