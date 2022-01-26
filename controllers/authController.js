@@ -22,7 +22,7 @@ const logInUser = async (req, res) => {
     }
 
     const userToken = {
-      username: user.username,
+      username,
     };
 
     const token = jwt.sign(userToken, config.SECRET, { expiresIn: 30 });
@@ -32,7 +32,9 @@ const logInUser = async (req, res) => {
       httpOnly: true,
       secure: false,
       SameSite: 'none',
-    }).status(200).send();
+    });
+    res.cookie('username', username);
+    res.status(200).send();
   } catch (err) {
     console.error(err.message);
   }
@@ -64,16 +66,17 @@ const signUpUser = async (req, res) => {
       httpOnly: true,
       secure: false,
       SameSite: 'none',
-    }).status(200).json();
+    });
+    res.cookie('username', user.username);
+    res.status(200).json();
   } catch (err) {
     console.error(err.message);
   }
 };
 
 const returnSecretData = async (req, res) => {
-  console.log(req.cookies);
   const { secretToken } = req.cookies;
-  if (!secretToken) return res.status(401).json({ result: 'Missing token' });
+  if (!secretToken) return res.json({ result: 'Missing token' });
 
   try {
     jwt.verify(secretToken, config.SECRET);
@@ -82,12 +85,14 @@ const returnSecretData = async (req, res) => {
     });
   } catch (err) {
     if (err.name === 'TokenExpiredError') {
+      res.clearCookie('username');
       res.clearCookie('secretToken');
       return res.json({ result: 'Invalid token' });
     }
     return res.json({ result: 'Something went wrong...' });
   }
 };
+
 export default {
   logInUser,
   signUpUser,
