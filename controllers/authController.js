@@ -44,8 +44,14 @@ const logInUser = async (req, res) => {
 };
 
 const logOutUser = async (req, res) => {
-  res.clearCookie('secretToken');
-  res.clearCookie('username');
+  res.clearCookie('secretToken', {
+    secure: true,
+    sameSite: 'none',
+  });
+  res.clearCookie('username', {
+    secure: true,
+    sameSite: 'none',
+  });
   res.status(200).send();
 };
 
