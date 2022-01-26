@@ -31,7 +31,7 @@ const logInUser = async (req, res) => {
       'max-age': 30,
       httpOnly: true,
       secure: true,
-      SameSite: 'none',
+      sameSite: 'none',
     });
     res.cookie('username', username);
     res.status(200).send();
@@ -71,7 +71,7 @@ const signUpUser = async (req, res) => {
       'max-age': 30,
       httpOnly: true,
       secure: true,
-      SameSite: 'none',
+      sameSite: 'none',
     });
     res.cookie('username', user.username);
     res.status(200).json();
