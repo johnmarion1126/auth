@@ -1,5 +1,5 @@
 # auth
-A simple sign up and log in form with authentication and authorization. Hosted on heroku: https://really-awesome-auth.netlify.app/
+A simple sign up and log in form with authentication and authorization. Check out the [live site](https://really-awesome-auth.netlify.app/)!
 
 ![image](https://user-images.githubusercontent.com/48599206/150416366-54de148f-d34f-40a3-aa07-bcedd1d5b9a9.png)
 
