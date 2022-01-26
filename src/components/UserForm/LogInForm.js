@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { logIn, setUsername, setToken } from '../../features/User/userSlice';
+import { logIn, setUsername } from '../../features/User/userSlice';
 import { useLazyLogInUserQuery } from '../../services/User/userApi';
 
 const LogInForm = ({ username, password }) => {
@@ -36,7 +36,6 @@ const LogInForm = ({ username, password }) => {
         setIsWrongInfo(false);
         dispatch(logIn());
         dispatch(setUsername(username.value));
-        dispatch(setToken(res.data.token));
         username.setValue('');
         password.setValue('');
       } else {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { logIn, setUsername, setToken } from '../../features/User/userSlice';
+import { logIn, setUsername } from '../../features/User/userSlice';
 
 import { useSignUpUserMutation } from '../../services/User/userApi';
 import useField from '../useField';
@@ -52,7 +52,6 @@ const SignUpForm = ({ username, password }) => {
           setIsUsernameTaken(false);
           dispatch(logIn());
           dispatch(setUsername(username.value));
-          dispatch(setToken(res.data.token));
           username.setValue('');
           password.setValue('');
           retypePassword.setValue('');
