@@ -4,11 +4,6 @@ import { pool } from '../database/db.js';
 import config from '../utils/config.js';
 
 const logInUser = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
   if (req.query.username === undefined || req.query.password === undefined) return;
   const { username, password } = req.query;
 
@@ -32,7 +27,7 @@ const logInUser = async (req, res) => {
 
     const token = jwt.sign(userToken, config.SECRET, { expiresIn: 60 * 60 });
 
-    res.cookie('test_token', token, {
+    res.cookie('token', token, {
       'max-age': 50,
       httpOnly: true,
       secure: false,
@@ -44,11 +39,6 @@ const logInUser = async (req, res) => {
 };
 
 const signUpUser = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
   const { userId, username, password } = req.body;
 
   const saltRounds = 10;
@@ -69,7 +59,7 @@ const signUpUser = async (req, res) => {
 
     const token = jwt.sign(userToken, config.SECRET, { expiresIn: 60 * 60 });
 
-    res.cookie('test_token', token, {
+    res.cookie('token', token, {
       'max-age': 50,
       httpOnly: true,
       secure: false,
@@ -81,20 +71,13 @@ const signUpUser = async (req, res) => {
 };
 
 const returnSecretData = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  console.log(req.cookies);
-  console.log(req.cookies.csrftoken);
-  const { authorization } = req.headers;
-  if (!authorization) return res.status(401).json({ error: 'token missing or invalid' });
+  const { token } = req.cookies;
+  if (!token) return res.status(401).json({ result: 'Missing token' });
 
-  const token = authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, config.SECRET);
 
   if (!decodedToken.iat) {
-    return res.status(401).json({ error: 'token missing or invalid' });
+    return res.status(401).json({ result: 'Invalid token' });
   }
 
   res.json({
