@@ -11,7 +11,6 @@ const AuthroziedButton = () => {
     if (!isLoggedIn) return;
     const test = await trigger();
     setAuthStatus(test.data.result);
-    console.log(test.data);
   };
 
   return (

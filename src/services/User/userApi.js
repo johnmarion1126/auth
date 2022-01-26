@@ -36,10 +36,24 @@ const userApi = createApi({
         },
       }),
     }),
+    logOutUser: builder.query({
+      query: () => ({
+        credentials: 'include',
+        url: '/logout',
+        method: 'GET',
+      }),
+    }),
     getSecretData: builder.query({
       query: () => ({
         credentials: 'include',
         url: '/secret',
+        method: 'GET',
+      }),
+    }),
+    isAuthenticated: builder.query({
+      query: () => ({
+        credentials: 'include',
+        url: '/authorize',
         method: 'GET',
       }),
     }),
@@ -51,5 +65,7 @@ export const {
   useSignUpUserMutation,
   useLazyGetSecretDataQuery,
   useLazyLogInUserQuery,
+  useLazyIsAuthenticatedQuery,
+  useLazyLogOutUserQuery,
 } = userApi;
 export default userApi;
