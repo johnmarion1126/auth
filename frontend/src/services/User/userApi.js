@@ -5,7 +5,7 @@ import uniqid from 'uniqid';
 const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/',
+    baseUrl: process.env.REACT_APP_BASE_URL,
   }),
   tagTypes: ['User'],
   endpoints: (builder) => ({
