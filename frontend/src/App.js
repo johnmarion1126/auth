@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logIn, setUsername } from './features/User/userSlice';
+import { useLazyIsAuthenticatedQuery } from './services/User/userApi';
 
 import Home from './components/Home/Home';
 import UserForm from './components/UserForm/UserForm';
@@ -8,6 +10,16 @@ import AuthroziedButton from './components/Button/Button';
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const dispatch = useDispatch();
+  const [trigger] = useLazyIsAuthenticatedQuery();
+
+  useEffect(async () => {
+    const res = await trigger();
+    if (!res.data.error) {
+      dispatch(setUsername(res.data[0].username));
+      dispatch(logIn());
+    }
+  }, []);
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center text-center items-center m-0 p-0 bg-slate-50">
