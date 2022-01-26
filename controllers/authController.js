@@ -33,7 +33,9 @@ const logInUser = async (req, res) => {
       secure: true,
       sameSite: 'none',
     });
-    res.cookie('username', username);
+    res.cookie('username', username, {
+      sameSite: 'none'
+    });
     res.status(200).send();
   } catch (err) {
     console.error(err.message);
@@ -73,7 +75,9 @@ const signUpUser = async (req, res) => {
       secure: true,
       sameSite: 'none',
     });
-    res.cookie('username', user.username);
+    res.cookie('username', user.username, {
+      sameSite: 'none'
+    });
     res.status(200).json();
   } catch (err) {
     console.error(err.message);
