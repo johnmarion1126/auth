@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BASE_URL,
+    baseUrl: 'https://awesome-auth-server.herokuapp.com/',
   }),
   tagTypes: ['User'],
   endpoints: (builder) => ({
