@@ -65,7 +65,6 @@ const SignUpForm = ({ username, password }) => {
 
   return (
     <div>
-      <h1 className="text-xl font-bold text-gray-900">Sign Up</h1>
       <form>
         <div className="m-2 mt-4 text-gray-800 focus:border-gray-900" required>Create Username</div>
         <input
@@ -88,14 +87,15 @@ const SignUpForm = ({ username, password }) => {
           onChange={retypePassword.onChange}
           className={!isRetypePasswordEmpty ? 'border-solid border-gray-400 border-2 p-1 px-2 rounded-md outline-indigo-500' : 'border-solid border-red-400 border-2 p-1 px-2 rounded-md outline-red-400'}
         />
+        { isUsernameEmpty || isPasswordEmpty || isRetypePasswordEmpty ? <div className="text-red-400 mt-6">All fields must be filled</div> : null }
+        { !isUsernameEmpty && !isPasswordEmpty && !isRetypePasswordEmpty && password.value !== retypePassword.value ? <div className="text-red-400 mt-6">Passwords must match</div> : null }
+        { !isUsernameTaken ? null : <div className="text-red-400 mt-6">Username is taken</div>}
+        <div className="h-8" />
         <input
           type="submit"
-          className="absolute top-0 invisible"
+          className="bg-indigo-500 w-[100%] p-2 rounded-md text-white font-semibold hover:cursor-pointer hover:opacity-70"
           onClick={handleSumbit}
         />
-        { isUsernameEmpty || isPasswordEmpty || isRetypePasswordEmpty ? <div className="text-red-400 mt-4">All fields must be filled</div> : null }
-        { !isUsernameEmpty && !isPasswordEmpty && !isRetypePasswordEmpty && password.value !== retypePassword.value ? <div className="text-red-400 mt-4">Passwords must match</div> : null }
-        { !isUsernameTaken ? null : <div className="text-red-400 mt-4">Username is taken</div>}
       </form>
     </div>
 
