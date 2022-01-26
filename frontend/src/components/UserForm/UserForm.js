@@ -11,16 +11,16 @@ const UserForm = () => {
 
   return (
     <>
-      <h1 className="text-lg mb-4 text-indigo-500 font-bold">Authorization</h1>
+      <h1 className="text-3xl mb-4 text-indigo-500 font-bold">Auth</h1>
+      <div>
+        <button className={isNewUser === 'SignUp' ? 'm-2  mx-4 font-semibold hover:opacity-70 text-gray-900' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-400'} type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign Up</button>
+        <button className={isNewUser === 'LogIn' ? 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-900' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-400'} type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
+      </div>
       {
         isNewUser === 'LogIn'
           ? <LogInForm username={username} password={password} />
           : <SignUpForm username={username} password={password} />
       }
-      <div className="mt-6">
-        <button className={isNewUser === 'SignUp' ? 'm-2  mx-4 font-semibold hover:opacity-70 text-indigo-500' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-400'} type="button" onClick={() => { setIsNewUser('SignUp'); }}>Sign Up</button>
-        <button className={isNewUser === 'LogIn' ? 'm-2 mx-4 font-semibold hover:opacity-70 text-indigo-500' : 'm-2 mx-4 font-semibold hover:opacity-70 text-gray-400'} type="button" onClick={() => { setIsNewUser('LogIn'); }}>Log In</button>
-      </div>
     </>
   );
 };
