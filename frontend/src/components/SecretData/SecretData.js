@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useGetSecretDataQuery } from '../../services/User/userApi';
 
-const SecretData = ({ token }) => {
-  const { data, error, isLoading } = useGetSecretDataQuery(token);
+const SecretData = () => {
+  const { data, error, isLoading } = useGetSecretDataQuery();
 
   return (
     <div className="text-gray-700 mt-4">

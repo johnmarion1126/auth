@@ -15,8 +15,11 @@ const userApi = createApi({
     }),
     signUpUser: builder.mutation({
       query: ({ username, password }) => ({
+        withCredentials: true,
+        credentials: 'include',
         url: '/signup',
         method: 'POST',
+        mode: 'cors',
         body: {
           userId: uniqid(),
           username,
@@ -26,8 +29,12 @@ const userApi = createApi({
     }),
     logInUser: builder.query({
       query: ({ username, password }) => ({
+        withCredentials: true,
+        credentials: 'include',
         url: '/login',
         method: 'GET',
+        mode: 'cors',
+        redirect: 'follow',
         params: {
           username,
           password,
@@ -35,12 +42,11 @@ const userApi = createApi({
       }),
     }),
     getSecretData: builder.query({
-      query: (token) => ({
+      query: () => ({
+        withCredentials: true,
+        credentials: 'include',
         url: '/secret',
         method: 'GET',
-        headers: {
-          authorization: token,
-        },
       }),
     }),
   }),
@@ -49,7 +55,7 @@ const userApi = createApi({
 export const {
   useUsersQuery,
   useSignUpUserMutation,
-  useGetSecretDataQuery,
+  useLazyGetSecretDataQuery,
   useLazyLogInUserQuery,
 } = userApi;
 export default userApi;
