@@ -7,6 +7,10 @@ const pool = new pg.Pool({
   host: config.DB_HOST,
   database: config.DB_DATABASE,
   port: config.DB_PORT,
+  ssl: {
+    require: true,
+    rejectUnauthorized: false,
+  }
 });
 
 const connectToDatabase = async () => {

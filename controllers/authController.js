@@ -30,7 +30,7 @@ const logInUser = async (req, res) => {
     res.cookie('secretToken', token, {
       'max-age': 30,
       httpOnly: true,
-      secure: false,
+      secure: true,
       SameSite: 'none',
     });
     res.cookie('username', username);
@@ -70,7 +70,7 @@ const signUpUser = async (req, res) => {
     res.cookie('secretToken', token, {
       'max-age': 30,
       httpOnly: true,
-      secure: false,
+      secure: true,
       SameSite: 'none',
     });
     res.cookie('username', user.username);
