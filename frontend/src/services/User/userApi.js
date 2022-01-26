@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// eslint-disable-next-line no-unused-vars
 import uniqid from 'uniqid';
 
 const userApi = createApi({
@@ -15,6 +14,7 @@ const userApi = createApi({
     }),
     signUpUser: builder.mutation({
       query: ({ username, password }) => ({
+        credentials: 'include',
         url: '/signup',
         method: 'POST',
         body: {
@@ -26,21 +26,35 @@ const userApi = createApi({
     }),
     logInUser: builder.query({
       query: ({ username, password }) => ({
+        credentials: 'include',
         url: '/login',
         method: 'GET',
+        redirect: 'follow',
         params: {
           username,
           password,
         },
       }),
     }),
+    logOutUser: builder.query({
+      query: () => ({
+        credentials: 'include',
+        url: '/logout',
+        method: 'GET',
+      }),
+    }),
     getSecretData: builder.query({
-      query: (token) => ({
+      query: () => ({
+        credentials: 'include',
         url: '/secret',
         method: 'GET',
-        headers: {
-          authorization: token,
-        },
+      }),
+    }),
+    isAuthenticated: builder.query({
+      query: () => ({
+        credentials: 'include',
+        url: '/authorize',
+        method: 'GET',
       }),
     }),
   }),
@@ -49,7 +63,9 @@ const userApi = createApi({
 export const {
   useUsersQuery,
   useSignUpUserMutation,
-  useGetSecretDataQuery,
+  useLazyGetSecretDataQuery,
   useLazyLogInUserQuery,
+  useLazyIsAuthenticatedQuery,
+  useLazyLogOutUserQuery,
 } = userApi;
 export default userApi;
