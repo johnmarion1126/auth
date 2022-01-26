@@ -40,6 +40,12 @@ const logInUser = async (req, res) => {
   }
 };
 
+const logOutUser = async (req, res) => {
+  res.clearCookie('secretToken');
+  res.clearCookie('username');
+  res.status(200).send();
+};
+
 const signUpUser = async (req, res) => {
   const { userId, username, password } = req.body;
 
@@ -80,6 +86,7 @@ const returnSecretData = async (req, res) => {
 
   try {
     jwt.verify(secretToken, config.SECRET);
+
     res.json({
       result: 'The button has been pressed!',
     });
@@ -93,8 +100,28 @@ const returnSecretData = async (req, res) => {
   }
 };
 
+const checkIfAuthorized = async (req, res) => {
+  const { secretToken, username } = req.cookies;
+  if (!secretToken) return res.json({ error: 'No token' });
+
+  try {
+    jwt.verify(secretToken, config.SECRET);
+    const user = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+    res.status(200).json(user.rows);
+  } catch (err) {
+    if (err.name === 'TokenExpiredError') {
+      res.clearCookie('username');
+      res.clearCookie('secretToken');
+      return res.json({ error: 'Invalid token' });
+    }
+    return res.json({ error: 'Something went wrong...' });
+  }
+};
+
 export default {
   logInUser,
+  logOutUser,
   signUpUser,
   returnSecretData,
+  checkIfAuthorized,
 };
