@@ -34,6 +34,7 @@ const logInUser = async (req, res) => {
       sameSite: 'none',
     });
     res.cookie('username', username, {
+      secure: true,
       sameSite: 'none'
     });
     res.status(200).send();
@@ -76,6 +77,7 @@ const signUpUser = async (req, res) => {
       sameSite: 'none',
     });
     res.cookie('username', user.username, {
+      secure: true,
       sameSite: 'none'
     });
     res.status(200).json();
