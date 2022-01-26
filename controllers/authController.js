@@ -25,10 +25,10 @@ const logInUser = async (req, res) => {
       username: user.username,
     };
 
-    const token = jwt.sign(userToken, config.SECRET, { expiresIn: 60 * 60 });
+    const token = jwt.sign(userToken, config.SECRET, { expiresIn: 30 });
 
-    res.cookie('token', token, {
-      'max-age': 50,
+    res.cookie('secretToken', token, {
+      'max-age': 30,
       httpOnly: true,
       secure: false,
       SameSite: 'none',
@@ -57,10 +57,10 @@ const signUpUser = async (req, res) => {
       username: user.username,
     };
 
-    const token = jwt.sign(userToken, config.SECRET, { expiresIn: 60 * 60 });
+    const token = jwt.sign(userToken, config.SECRET, { expiresIn: 30 });
 
-    res.cookie('token', token, {
-      'max-age': 50,
+    res.cookie('secretToken', token, {
+      'max-age': 30,
       httpOnly: true,
       secure: false,
       SameSite: 'none',
@@ -71,18 +71,22 @@ const signUpUser = async (req, res) => {
 };
 
 const returnSecretData = async (req, res) => {
-  const { token } = req.cookies;
-  if (!token) return res.status(401).json({ result: 'Missing token' });
+  console.log(req.cookies);
+  const { secretToken } = req.cookies;
+  if (!secretToken) return res.status(401).json({ result: 'Missing token' });
 
-  const decodedToken = jwt.verify(token, config.SECRET);
-
-  if (!decodedToken.iat) {
-    return res.status(401).json({ result: 'Invalid token' });
+  try {
+    jwt.verify(secretToken, config.SECRET);
+    res.json({
+      result: 'The button has been pressed!',
+    });
+  } catch (err) {
+    if (err.name === 'TokenExpiredError') {
+      res.clearCookie('secretToken');
+      return res.json({ result: 'Invalid token' });
+    }
+    return res.json({ result: 'Something went wrong...' });
   }
-
-  res.json({
-    result: 'The button has been pressed!',
-  });
 };
 export default {
   logInUser,
